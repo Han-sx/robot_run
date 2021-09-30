@@ -29,19 +29,19 @@ def keyword_g(json):
     # # 如果有人@娜娜米
     # if '[CQ:at,qq=2246376807]' in raw_message:
 
-    # 返回图片
-    if raw_message == '涩图' or raw_message == '瑟图' or raw_message == '色图' or raw_message == '来点色图' or raw_message == '来点瑟图' or raw_message == '来点涩图':
-        while account != 2:
-            r = requests.get("https://api.lolicon.app/setu/v2")  # 获取
-            p_url = r.json()['data'][0]['urls']['original']  # 解析url
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=[CQ:image,file=" + str(p_url) + "]"
-            requests.get(url)
-            print(raw_message + str(uid))
-            print(p_url)
-            account += 1
-            time.sleep(1)
-        return 'OK'
+    # # 返回图片
+    # if raw_message == '涩图' or raw_message == '瑟图' or raw_message == '色图' or raw_message == '来点色图' or raw_message == '来点瑟图' or raw_message == '来点涩图':
+    #     while account != 2:
+    #         r = requests.get("https://api.lolicon.app/setu/v2")  # 获取
+    #         p_url = r.json()['data'][0]['urls']['original']  # 解析url
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=[CQ:image,file=" + str(p_url) + "]"
+    #         requests.get(url)
+    #         print(raw_message + str(uid))
+    #         print(p_url)
+    #         account += 1
+    #         time.sleep(1)
+    #     return 'OK'
 
     # 自主学习
     if raw_message[0:3] == '学习 ':
@@ -325,293 +325,293 @@ def keyword_g(json):
         except:
             return 'OK'
 
-    # 猜乌龟游戏
-    if raw_message == '猜乌龟':
-        # 与 wugui.db 数据库连接
-        conn = sqlite3.connect('wugui.db')
-        cur = conn.cursor()
+    # # 猜乌龟游戏
+    # if raw_message == '猜乌龟':
+    #     # 与 wugui.db 数据库连接
+    #     conn = sqlite3.connect('wugui.db')
+    #     cur = conn.cursor()
 
-        # 查找单条数据
-        sql_text_2 = "SELECT * FROM wugui WHERE 游戏编号 = 1"
-        print(sql_text_2)
-        cur.execute(sql_text_2)
-        r = cur.fetchall()
+    #     # 查找单条数据
+    #     sql_text_2 = "SELECT * FROM wugui WHERE 游戏编号 = 1"
+    #     print(sql_text_2)
+    #     cur.execute(sql_text_2)
+    #     r = cur.fetchall()
 
-        if len(r) == 0:
-            # 新开一个乌龟游戏
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=[CQ:face,id=43][CQ:face,id=43][CQ:face,id=43]\n\n[CQ:face,id=144]咻！娜娜米扔出了一只乌龟~\n[CQ:face,id=12]究竟会是什么乌龟呢？\n\n[CQ:face,id=140]格式：猜乌龟 中乌龟 1000"
-            # url = escape_symbol(url)
-            print(url)
-            requests.get(url)
-            sql_text_6 = "INSERT INTO wugui VALUES(1,'111111','111111',111111)"
-            print(sql_text_6)
-            cur.execute(sql_text_6)
-            # 确认插入
-            conn.commit()
-            # 关闭游标
-            cur.close()
-            # 关闭连接
-            conn.close()
+    #     if len(r) == 0:
+    #         # 新开一个乌龟游戏
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=[CQ:face,id=43][CQ:face,id=43][CQ:face,id=43]\n\n[CQ:face,id=144]咻！娜娜米扔出了一只乌龟~\n[CQ:face,id=12]究竟会是什么乌龟呢？\n\n[CQ:face,id=140]格式：猜乌龟 中乌龟 1000"
+    #         # url = escape_symbol(url)
+    #         print(url)
+    #         requests.get(url)
+    #         sql_text_6 = "INSERT INTO wugui VALUES(1,'111111','111111',111111)"
+    #         print(sql_text_6)
+    #         cur.execute(sql_text_6)
+    #         # 确认插入
+    #         conn.commit()
+    #         # 关闭游标
+    #         cur.close()
+    #         # 关闭连接
+    #         conn.close()
 
-            time.sleep(60)  # 60秒内用于接受数据
+    #         time.sleep(60)  # 60秒内用于接受数据
 
-            # 随机结果
-            game_wugui_result_int = random.randint(1, 100)
-            if game_wugui_result_int > 0 and game_wugui_result_int <= 45:
-                game_wugui_result = '小乌龟'
-            elif game_wugui_result_int >= 46 and game_wugui_result_int < 56:
-                game_wugui_result = '中乌龟'
-            else:
-                game_wugui_result = '大乌龟'
+    #         # 随机结果
+    #         game_wugui_result_int = random.randint(1, 100)
+    #         if game_wugui_result_int > 0 and game_wugui_result_int <= 45:
+    #             game_wugui_result = '小乌龟'
+    #         elif game_wugui_result_int >= 46 and game_wugui_result_int < 56:
+    #             game_wugui_result = '中乌龟'
+    #         else:
+    #             game_wugui_result = '大乌龟'
 
-            # 宣布结果
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=[CQ:face,id=0]娜娜米最终抛出的是~\n\n[CQ:face,id=137]" + str(
-                    game_wugui_result) + "!!!"
-            print(url)
-            requests.get(url)
-            time.sleep(0.5)
+    #         # 宣布结果
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=[CQ:face,id=0]娜娜米最终抛出的是~\n\n[CQ:face,id=137]" + str(
+    #                 game_wugui_result) + "!!!"
+    #         print(url)
+    #         requests.get(url)
+    #         time.sleep(0.5)
 
-            # 与 wugui.db 数据库连接查询结果
-            conn2 = sqlite3.connect('wugui.db')
-            cur2 = conn2.cursor()
+    #         # 与 wugui.db 数据库连接查询结果
+    #         conn2 = sqlite3.connect('wugui.db')
+    #         cur2 = conn2.cursor()
 
-            # 查找单条数据
-            sql_text_3 = "SELECT * FROM wugui WHERE 游戏编号 = 1"
-            print(sql_text_3)
-            cur2.execute(sql_text_3)
-            r2 = cur2.fetchall()
+    #         # 查找单条数据
+    #         sql_text_3 = "SELECT * FROM wugui WHERE 游戏编号 = 1"
+    #         print(sql_text_3)
+    #         cur2.execute(sql_text_3)
+    #         r2 = cur2.fetchall()
 
-            if len(r2) == 1:
-                # 如果无人参加
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=[CQ:face,id=144]竟然没有人参加呢~"
-                print(url)
-                requests.get(url)
-            else:
-                # 如果有人参加
-                for i in r2:
-                    qq = i[1]
-                    if qq == '111111':
-                        continue
-                    game_answer = i[2]
-                    game_namidou = i[3]
+    #         if len(r2) == 1:
+    #             # 如果无人参加
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=[CQ:face,id=144]竟然没有人参加呢~"
+    #             print(url)
+    #             requests.get(url)
+    #         else:
+    #             # 如果有人参加
+    #             for i in r2:
+    #                 qq = i[1]
+    #                 if qq == '111111':
+    #                     continue
+    #                 game_answer = i[2]
+    #                 game_namidou = i[3]
 
-                    # 与 person_info.db 数据库连接更新娜米豆
-                    conn3 = sqlite3.connect('person_info.db')
-                    cur3 = conn3.cursor()
+    #                 # 与 person_info.db 数据库连接更新娜米豆
+    #                 conn3 = sqlite3.connect('person_info.db')
+    #                 cur3 = conn3.cursor()
 
-                    # 获取原娜米豆
-                    sql_text_8 = "SELECT * FROM info WHERE QQ='" + \
-                        str(qq) + "'"
-                    print(sql_text_8)
-                    cur3.execute(sql_text_8)
-                    r3 = cur3.fetchall()
-                    root_namidou = r3[0][3]
-                    root_namidou = int(root_namidou)
-                    root_pet = r3[0][4]
+    #                 # 获取原娜米豆
+    #                 sql_text_8 = "SELECT * FROM info WHERE QQ='" + \
+    #                     str(qq) + "'"
+    #                 print(sql_text_8)
+    #                 cur3.execute(sql_text_8)
+    #                 r3 = cur3.fetchall()
+    #                 root_namidou = r3[0][3]
+    #                 root_namidou = int(root_namidou)
+    #                 root_pet = r3[0][4]
 
-                    # 中途可能变化的娜米豆
-                    if root_namidou < game_namidou:
-                        url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                            str(gid) + "&message=[CQ:at,qq=" + str(qq) + \
-                            "]\n\n[CQ:face,id=178]似乎豆豆发生了变化，已经不够了呢~"
-                        print(url)
-                        requests.get(url)
-                        continue
+    #                 # 中途可能变化的娜米豆
+    #                 if root_namidou < game_namidou:
+    #                     url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                         str(gid) + "&message=[CQ:at,qq=" + str(qq) + \
+    #                         "]\n\n[CQ:face,id=178]似乎豆豆发生了变化，已经不够了呢~"
+    #                     print(url)
+    #                     requests.get(url)
+    #                     continue
 
-                    if game_answer == game_wugui_result:
-                        # 如果答案正确
-                        # 更新娜米豆的值
+    #                 if game_answer == game_wugui_result:
+    #                     # 如果答案正确
+    #                     # 更新娜米豆的值
 
-                        # 检测是否是有红莲或者曲
-                        if root_pet == '露西亚·红莲' or root_pet == '曲·雀翎':
-                            random_r = random.randint(1, 10)
-                            if random_r > 3 and random_r < 7:
-                                game_namidou = int(game_namidou) * 2
+    #                     # 检测是否是有红莲或者曲
+    #                     if root_pet == '露西亚·红莲' or root_pet == '曲·雀翎':
+    #                         random_r = random.randint(1, 10)
+    #                         if random_r > 3 and random_r < 7:
+    #                             game_namidou = int(game_namidou) * 2
 
-                        if root_pet == '加百利·星陨':
-                            random_r = random.randint(1, 10)
-                            if random_r > 4 and random_r < 7:
-                                game_namidou = int(game_namidou) * 2
+    #                     if root_pet == '加百利·星陨':
+    #                         random_r = random.randint(1, 10)
+    #                         if random_r > 4 and random_r < 7:
+    #                             game_namidou = int(game_namidou) * 2
 
-                        # 检测是否是中乌龟
-                        if game_wugui_result == '中乌龟':
-                            game_namidou = int(game_namidou) * 5
-                            new_namidou = root_namidou + int(game_namidou)
-                        else:
-                            new_namidou = root_namidou + int(game_namidou)
-                        sql_text_7 = "UPDATE info SET 娜米豆 = " + \
-                            str(new_namidou) + " WHERE QQ = " + str(qq)
-                        print(sql_text_7)
-                        cur3.execute(sql_text_7)
-                        # 确认插入
-                        conn3.commit()
-                        # 关闭游标
-                        cur3.close()
-                        # 关闭连接
-                        conn3.close()
+    #                     # 检测是否是中乌龟
+    #                     if game_wugui_result == '中乌龟':
+    #                         game_namidou = int(game_namidou) * 5
+    #                         new_namidou = root_namidou + int(game_namidou)
+    #                     else:
+    #                         new_namidou = root_namidou + int(game_namidou)
+    #                     sql_text_7 = "UPDATE info SET 娜米豆 = " + \
+    #                         str(new_namidou) + " WHERE QQ = " + str(qq)
+    #                     print(sql_text_7)
+    #                     cur3.execute(sql_text_7)
+    #                     # 确认插入
+    #                     conn3.commit()
+    #                     # 关闭游标
+    #                     cur3.close()
+    #                     # 关闭连接
+    #                     conn3.close()
 
-                        if root_pet == '露西亚·红莲' or root_pet == '曲·雀翎':
-                            if random_r > 3 and random_r < 7:
-                                if root_pet == '露西亚·红莲':
-                                    url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                        qq) + "]\n[CQ:face,id=145]红莲将一直在您身边，指挥官\n[CQ:face,id=86]双倍获取 " + str(game_namidou) + " 娜米豆"
-                                    print(url)
-                                    requests.get(url)
-                                else:
-                                    url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                        qq) + "]\n[CQ:face,id=145]呵~暂时将力量借给你而已\n[CQ:face,id=86]双倍获取 " + str(game_namidou) + " 娜米豆"
-                                    print(url)
-                                    requests.get(url)
-                            else:
-                                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                    qq) + "]\n[CQ:face,id=144]诶嘿！猜对啦~\n[CQ:face,id=86]成功赚取 " + str(game_namidou) + " 娜米豆"
-                                print(url)
-                                requests.get(url)
-                        elif root_pet == '加百利·星陨':
-                            if random_r > 4 and random_r < 7:
-                                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                    qq) + "]\n[CQ:face,id=145]享受吧！无知的人类~\n[CQ:face,id=86]双倍获取 " + str(game_namidou) + " 娜米豆"
-                                print(url)
-                                requests.get(url)
-                            else:
-                                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                    qq) + "]\n[CQ:face,id=144]诶嘿！猜对啦~\n[CQ:face,id=86]成功赚取 " + str(game_namidou) + " 娜米豆"
-                                print(url)
-                                requests.get(url)
-                        else:
-                            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                qq) + "]\n[CQ:face,id=144]诶嘿！猜对啦~\n[CQ:face,id=86]成功赚取 " + str(game_namidou) + " 娜米豆"
-                            print(url)
-                            requests.get(url)
-                    else:
-                        # 如果答案错误
-                        # 更新娜米豆的值
+    #                     if root_pet == '露西亚·红莲' or root_pet == '曲·雀翎':
+    #                         if random_r > 3 and random_r < 7:
+    #                             if root_pet == '露西亚·红莲':
+    #                                 url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                     qq) + "]\n[CQ:face,id=145]红莲将一直在您身边，指挥官\n[CQ:face,id=86]双倍获取 " + str(game_namidou) + " 娜米豆"
+    #                                 print(url)
+    #                                 requests.get(url)
+    #                             else:
+    #                                 url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                     qq) + "]\n[CQ:face,id=145]呵~暂时将力量借给你而已\n[CQ:face,id=86]双倍获取 " + str(game_namidou) + " 娜米豆"
+    #                                 print(url)
+    #                                 requests.get(url)
+    #                         else:
+    #                             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                 qq) + "]\n[CQ:face,id=144]诶嘿！猜对啦~\n[CQ:face,id=86]成功赚取 " + str(game_namidou) + " 娜米豆"
+    #                             print(url)
+    #                             requests.get(url)
+    #                     elif root_pet == '加百利·星陨':
+    #                         if random_r > 4 and random_r < 7:
+    #                             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                 qq) + "]\n[CQ:face,id=145]享受吧！无知的人类~\n[CQ:face,id=86]双倍获取 " + str(game_namidou) + " 娜米豆"
+    #                             print(url)
+    #                             requests.get(url)
+    #                         else:
+    #                             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                 qq) + "]\n[CQ:face,id=144]诶嘿！猜对啦~\n[CQ:face,id=86]成功赚取 " + str(game_namidou) + " 娜米豆"
+    #                             print(url)
+    #                             requests.get(url)
+    #                     else:
+    #                         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                             qq) + "]\n[CQ:face,id=144]诶嘿！猜对啦~\n[CQ:face,id=86]成功赚取 " + str(game_namidou) + " 娜米豆"
+    #                         print(url)
+    #                         requests.get(url)
+    #                 else:
+    #                     # 如果答案错误
+    #                     # 更新娜米豆的值
 
-                        # 宠物发动效果
-                        if root_pet == '里·异火' or root_pet == '露西亚·鸦羽':
-                            random_r = random.randint(1, 10)
-                            if random_r > 3 and random_r < 7:
-                                # 如果随机成功
-                                new_namidou = root_namidou + int(game_namidou)
-                                sql_text_7 = "UPDATE info SET 娜米豆 = " + \
-                                    str(new_namidou) + " WHERE QQ = " + str(qq)
-                                print(sql_text_7)
-                                cur3.execute(sql_text_7)
-                                # 确认插入
-                                conn3.commit()
-                                # 关闭游标
-                                cur3.close()
-                                # 关闭连接
-                                conn3.close()
-                                if root_pet == '里·异火':
-                                    url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                        qq) + "]\n[CQ:face,id=54]火神，是你不变的信仰！[CQ:face,id=54]\n[CQ:face,id=29]扭转乾坤~赢取 " + str(game_namidou) + " 娜米豆"
-                                    print(url)
-                                    requests.get(url)
-                                else:
-                                    url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                        qq) + "]\n[CQ:face,id=54]鸦羽，是你不变的信仰！[CQ:face,id=54]\n[CQ:face,id=29]扭转乾坤~赢取 " + str(game_namidou) + " 娜米豆"
-                                    print(url)
-                                    requests.get(url)
-                            else:
-                                new_namidou = root_namidou - int(game_namidou)
-                                sql_text_7 = "UPDATE info SET 娜米豆 = " + \
-                                    str(new_namidou) + " WHERE QQ = " + str(qq)
-                                print(sql_text_7)
-                                cur3.execute(sql_text_7)
-                                # 确认插入
-                                conn3.commit()
-                                # 关闭游标
-                                cur3.close()
-                                # 关闭连接
-                                conn3.close()
+    #                     # 宠物发动效果
+    #                     if root_pet == '里·异火' or root_pet == '露西亚·鸦羽':
+    #                         random_r = random.randint(1, 10)
+    #                         if random_r > 3 and random_r < 7:
+    #                             # 如果随机成功
+    #                             new_namidou = root_namidou + int(game_namidou)
+    #                             sql_text_7 = "UPDATE info SET 娜米豆 = " + \
+    #                                 str(new_namidou) + " WHERE QQ = " + str(qq)
+    #                             print(sql_text_7)
+    #                             cur3.execute(sql_text_7)
+    #                             # 确认插入
+    #                             conn3.commit()
+    #                             # 关闭游标
+    #                             cur3.close()
+    #                             # 关闭连接
+    #                             conn3.close()
+    #                             if root_pet == '里·异火':
+    #                                 url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                     qq) + "]\n[CQ:face,id=54]火神，是你不变的信仰！[CQ:face,id=54]\n[CQ:face,id=29]扭转乾坤~赢取 " + str(game_namidou) + " 娜米豆"
+    #                                 print(url)
+    #                                 requests.get(url)
+    #                             else:
+    #                                 url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                     qq) + "]\n[CQ:face,id=54]鸦羽，是你不变的信仰！[CQ:face,id=54]\n[CQ:face,id=29]扭转乾坤~赢取 " + str(game_namidou) + " 娜米豆"
+    #                                 print(url)
+    #                                 requests.get(url)
+    #                         else:
+    #                             new_namidou = root_namidou - int(game_namidou)
+    #                             sql_text_7 = "UPDATE info SET 娜米豆 = " + \
+    #                                 str(new_namidou) + " WHERE QQ = " + str(qq)
+    #                             print(sql_text_7)
+    #                             cur3.execute(sql_text_7)
+    #                             # 确认插入
+    #                             conn3.commit()
+    #                             # 关闭游标
+    #                             cur3.close()
+    #                             # 关闭连接
+    #                             conn3.close()
 
-                                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                    qq) + "]\n[CQ:face,id=19]可惜可惜~\n[CQ:face,id=18]失去了 " + str(game_namidou) + " 娜米豆"
-                                print(url)
-                                requests.get(url)
-                        elif root_pet == '加百利·星陨':
-                            random_r = random.randint(1, 10)
-                            if random_r > 4 and random_r < 7:
-                                # 如果随机成功
-                                new_namidou = root_namidou + int(game_namidou)
-                                sql_text_7 = "UPDATE info SET 娜米豆 = " + \
-                                    str(new_namidou) + " WHERE QQ = " + str(qq)
-                                print(sql_text_7)
-                                cur3.execute(sql_text_7)
-                                # 确认插入
-                                conn3.commit()
-                                # 关闭游标
-                                cur3.close()
-                                # 关闭连接
-                                conn3.close()
-                                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                    qq) + "]\n[CQ:face,id=54]就这？我加老爷一句话的事~[CQ:face,id=54]\n[CQ:face,id=29]扭转乾坤~赢取 " + str(game_namidou) + " 娜米豆"
-                                print(url)
-                                requests.get(url)
-                            else:
-                                new_namidou = root_namidou - int(game_namidou)
-                                sql_text_7 = "UPDATE info SET 娜米豆 = " + \
-                                    str(new_namidou) + " WHERE QQ = " + str(qq)
-                                print(sql_text_7)
-                                cur3.execute(sql_text_7)
-                                # 确认插入
-                                conn3.commit()
-                                # 关闭游标
-                                cur3.close()
-                                # 关闭连接
-                                conn3.close()
+    #                             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                 qq) + "]\n[CQ:face,id=19]可惜可惜~\n[CQ:face,id=18]失去了 " + str(game_namidou) + " 娜米豆"
+    #                             print(url)
+    #                             requests.get(url)
+    #                     elif root_pet == '加百利·星陨':
+    #                         random_r = random.randint(1, 10)
+    #                         if random_r > 4 and random_r < 7:
+    #                             # 如果随机成功
+    #                             new_namidou = root_namidou + int(game_namidou)
+    #                             sql_text_7 = "UPDATE info SET 娜米豆 = " + \
+    #                                 str(new_namidou) + " WHERE QQ = " + str(qq)
+    #                             print(sql_text_7)
+    #                             cur3.execute(sql_text_7)
+    #                             # 确认插入
+    #                             conn3.commit()
+    #                             # 关闭游标
+    #                             cur3.close()
+    #                             # 关闭连接
+    #                             conn3.close()
+    #                             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                 qq) + "]\n[CQ:face,id=54]就这？我加老爷一句话的事~[CQ:face,id=54]\n[CQ:face,id=29]扭转乾坤~赢取 " + str(game_namidou) + " 娜米豆"
+    #                             print(url)
+    #                             requests.get(url)
+    #                         else:
+    #                             new_namidou = root_namidou - int(game_namidou)
+    #                             sql_text_7 = "UPDATE info SET 娜米豆 = " + \
+    #                                 str(new_namidou) + " WHERE QQ = " + str(qq)
+    #                             print(sql_text_7)
+    #                             cur3.execute(sql_text_7)
+    #                             # 确认插入
+    #                             conn3.commit()
+    #                             # 关闭游标
+    #                             cur3.close()
+    #                             # 关闭连接
+    #                             conn3.close()
 
-                                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                    qq) + "]\n[CQ:face,id=19]可惜可惜~\n[CQ:face,id=18]失去了 " + str(game_namidou) + " 娜米豆"
-                                print(url)
-                                requests.get(url)
-                        else:
-                            new_namidou = root_namidou - int(game_namidou)
-                            sql_text_7 = "UPDATE info SET 娜米豆 = " + \
-                                str(new_namidou) + " WHERE QQ = " + str(qq)
-                            print(sql_text_7)
-                            cur3.execute(sql_text_7)
-                            # 确认插入
-                            conn3.commit()
-                            # 关闭游标
-                            cur3.close()
-                            # 关闭连接
-                            conn3.close()
+    #                             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                                 qq) + "]\n[CQ:face,id=19]可惜可惜~\n[CQ:face,id=18]失去了 " + str(game_namidou) + " 娜米豆"
+    #                             print(url)
+    #                             requests.get(url)
+    #                     else:
+    #                         new_namidou = root_namidou - int(game_namidou)
+    #                         sql_text_7 = "UPDATE info SET 娜米豆 = " + \
+    #                             str(new_namidou) + " WHERE QQ = " + str(qq)
+    #                         print(sql_text_7)
+    #                         cur3.execute(sql_text_7)
+    #                         # 确认插入
+    #                         conn3.commit()
+    #                         # 关闭游标
+    #                         cur3.close()
+    #                         # 关闭连接
+    #                         conn3.close()
 
-                            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
-                                qq) + "]\n[CQ:face,id=19]可惜可惜~\n[CQ:face,id=18]失去了 " + str(game_namidou) + " 娜米豆"
-                            print(url)
-                            requests.get(url)
+    #                         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:at,qq=" + str(
+    #                             qq) + "]\n[CQ:face,id=19]可惜可惜~\n[CQ:face,id=18]失去了 " + str(game_namidou) + " 娜米豆"
+    #                         print(url)
+    #                         requests.get(url)
 
-            # 删除wugui.db的数据
-            sql_text_9 = "DELETE FROM wugui WHERE 游戏编号 = 1"
-            print(sql_text_9)
-            cur2.execute(sql_text_9)
+    #         # 删除wugui.db的数据
+    #         sql_text_9 = "DELETE FROM wugui WHERE 游戏编号 = 1"
+    #         print(sql_text_9)
+    #         cur2.execute(sql_text_9)
 
-            # 确认插入
-            conn2.commit()
-            # 关闭游标
-            cur2.close()
-            # 关闭连接
-            conn2.close()
+    #         # 确认插入
+    #         conn2.commit()
+    #         # 关闭游标
+    #         cur2.close()
+    #         # 关闭连接
+    #         conn2.close()
 
-            return 'OK'
-        else:
-            # 确认插入
-            conn.commit()
-            # 关闭游标
-            cur.close()
-            # 关闭连接
-            conn.close()
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=[CQ:face,id=29]乌龟游戏进行中~快来猜猜看吧~"
-            print(url)
-            requests.get(url)
-            return 'OK'
+    #         return 'OK'
+    #     else:
+    #         # 确认插入
+    #         conn.commit()
+    #         # 关闭游标
+    #         cur.close()
+    #         # 关闭连接
+    #         conn.close()
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=[CQ:face,id=29]乌龟游戏进行中~快来猜猜看吧~"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
 
     # 收集乌龟答案
     if raw_message[0:4] == '猜乌龟 ':
@@ -2288,325 +2288,325 @@ def keyword_g(json):
             requests.get(url)
             return 'OK'
 
-    # 交易所功能
-    if raw_message == '交易所':
-        conn = sqlite3.connect('jiaoyisuo.db')
-        cur = conn.cursor()
+    # # 交易所功能
+    # if raw_message == '交易所':
+    #     conn = sqlite3.connect('jiaoyisuo.db')
+    #     cur = conn.cursor()
 
-        # 查询问题
-        sql_text_1 = "SELECT * FROM jiaoyisuo"
-        cur.execute(sql_text_1)
-        r = cur.fetchall()
+    #     # 查询问题
+    #     sql_text_1 = "SELECT * FROM jiaoyisuo"
+    #     cur.execute(sql_text_1)
+    #     r = cur.fetchall()
 
-        if len(r) == 1:
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + \
-                "&message=[CQ:face,id=158][CQ:face,id=158]娜娜米交易所[CQ:face,id=158][CQ:face,id=158]\n\n暂无上架商品"
-            requests.get(url)
-            return 'OK'
+    #     if len(r) == 1:
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + \
+    #             "&message=[CQ:face,id=158][CQ:face,id=158]娜娜米交易所[CQ:face,id=158][CQ:face,id=158]\n\n暂无上架商品"
+    #         requests.get(url)
+    #         return 'OK'
 
-        url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-            str(gid) + \
-            "&message=[CQ:face,id=158][CQ:face,id=158]娜娜米交易所[CQ:face,id=158][CQ:face,id=158]"
+    #     url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #         str(gid) + \
+    #         "&message=[CQ:face,id=158][CQ:face,id=158]娜娜米交易所[CQ:face,id=158][CQ:face,id=158]"
 
-        for i in r:
-            if str(i[2]) == "111111":
-                continue
-            url = url + "\n\n商品编号：" + str(i[0]) + "\n[CQ:face,id=46]出售人：" + str(
-                i[1]) + "\n[CQ:face,id=57]物品：" + str(i[3]) + "\n[CQ:face,id=158]价格：" + str(i[4])
-        print(url)
-        requests.get(url)
-        return 'OK'
+    #     for i in r:
+    #         if str(i[2]) == "111111":
+    #             continue
+    #         url = url + "\n\n商品编号：" + str(i[0]) + "\n[CQ:face,id=46]出售人：" + str(
+    #             i[1]) + "\n[CQ:face,id=57]物品：" + str(i[3]) + "\n[CQ:face,id=158]价格：" + str(i[4])
+    #     print(url)
+    #     requests.get(url)
+    #     return 'OK'
 
-    # 交易所上架功能
-    if raw_message[0:3] == '上架 ':
-        try:
-            # 拆分语句
-            new_message = raw_message[3:]
-            location = re.search(' ', new_message).span()
-            print(location)
-            sale_thing = new_message[:location[0]]  # 上架物品
-            print(sale_thing)
-            sale_namidou = new_message[location[1]:]  # 上架价格
-            print(sale_namidou)
+    # # 交易所上架功能
+    # if raw_message[0:3] == '上架 ':
+    #     try:
+    #         # 拆分语句
+    #         new_message = raw_message[3:]
+    #         location = re.search(' ', new_message).span()
+    #         print(location)
+    #         sale_thing = new_message[:location[0]]  # 上架物品
+    #         print(sale_thing)
+    #         sale_namidou = new_message[location[1]:]  # 上架价格
+    #         print(sale_namidou)
 
-            # 检测上架金额是否合理
-            if sale_namidou <= 0:
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=格式似乎不太对呢~"
-                print(url)
-                requests.get(url)
-                return 'OK'
-            try:
-                sale_namidou = int(sale_namidou)
-            except:
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=格式似乎不太对呢~"
-                print(url)
-                requests.get(url)
-                return 'OK'
+    #         # 检测上架金额是否合理
+    #         if sale_namidou <= 0:
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=格式似乎不太对呢~"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
+    #         try:
+    #             sale_namidou = int(sale_namidou)
+    #         except:
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=格式似乎不太对呢~"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
 
-            # 检测是否有此物品
-            conn = sqlite3.connect('have_things.db')
-            cur = conn.cursor()
+    #         # 检测是否有此物品
+    #         conn = sqlite3.connect('have_things.db')
+    #         cur = conn.cursor()
 
-            # 查询问题
-            sql_text_1 = "SELECT * FROM have_things WHERE QQ = '" + \
-                str(uid) + "' AND 物品 = '" + str(sale_thing) + "'"
-            cur.execute(sql_text_1)
-            r = cur.fetchall()
+    #         # 查询问题
+    #         sql_text_1 = "SELECT * FROM have_things WHERE QQ = '" + \
+    #             str(uid) + "' AND 物品 = '" + str(sale_thing) + "'"
+    #         cur.execute(sql_text_1)
+    #         r = cur.fetchall()
 
-            # 没有此物品
-            if len(r) == 0:
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=似乎没有这个物品呢~"
-                print(url)
-                requests.get(url)
-                return 'OK'
+    #         # 没有此物品
+    #         if len(r) == 0:
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=似乎没有这个物品呢~"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
 
-            # 有此物品则上架一个
-            save_number = len(r) - 1
-            # 删除所有
-            sql_text_4 = "DELETE FROM have_things WHERE 物品 ='" + \
-                str(sale_thing) + "' AND QQ = '" + str(uid) + "'"
-            cur.execute(sql_text_4)
-            # 插入保留的
-            sql_text_5 = "INSERT INTO have_things VALUES('" + str(
-                uid) + "', '" + str(sale_thing) + "')"
-            print(save_number)
-            for i in range(save_number):
-                cur.execute(sql_text_5)
-            # 确认插入
-            conn.commit()
-            # 关闭游标
-            cur.close()
-            # 关闭连接
-            conn.close()
+    #         # 有此物品则上架一个
+    #         save_number = len(r) - 1
+    #         # 删除所有
+    #         sql_text_4 = "DELETE FROM have_things WHERE 物品 ='" + \
+    #             str(sale_thing) + "' AND QQ = '" + str(uid) + "'"
+    #         cur.execute(sql_text_4)
+    #         # 插入保留的
+    #         sql_text_5 = "INSERT INTO have_things VALUES('" + str(
+    #             uid) + "', '" + str(sale_thing) + "')"
+    #         print(save_number)
+    #         for i in range(save_number):
+    #             cur.execute(sql_text_5)
+    #         # 确认插入
+    #         conn.commit()
+    #         # 关闭游标
+    #         cur.close()
+    #         # 关闭连接
+    #         conn.close()
 
-            # 加入交易所
-            conn2 = sqlite3.connect('jiaoyisuo.db')
-            cur2 = conn2.cursor()
+    #         # 加入交易所
+    #         conn2 = sqlite3.connect('jiaoyisuo.db')
+    #         cur2 = conn2.cursor()
 
-            # 获取当前商品编号进度
-            sql_text_6 = "SELECT * FROM jiaoyisuo WHERE QQ = '111111'"
-            cur2.execute(sql_text_6)
-            r = cur2.fetchall()
-            sale_number = int(r[0][4]) + 1
+    #         # 获取当前商品编号进度
+    #         sql_text_6 = "SELECT * FROM jiaoyisuo WHERE QQ = '111111'"
+    #         cur2.execute(sql_text_6)
+    #         r = cur2.fetchall()
+    #         sale_number = int(r[0][4]) + 1
 
-            # 更新商品编号
-            sql_text_7 = "UPDATE jiaoyisuo SET 价格 = " + \
-                str(sale_number) + " WHERE QQ = '111111'"
-            cur2.execute(sql_text_7)
+    #         # 更新商品编号
+    #         sql_text_7 = "UPDATE jiaoyisuo SET 价格 = " + \
+    #             str(sale_number) + " WHERE QQ = '111111'"
+    #         cur2.execute(sql_text_7)
 
-            # 获取当前人的昵称
-            url1 = "http://127.0.0.1:5700/get_group_member_info?group_id=" + \
-                str(gid) + "&user_id=" + str(uid)
-            r_1 = requests.get(url1)
-            name = r_1.json()['data']['card']
-            if len(name) == 0:
-                name = r_1.json()['data']['nickname']
+    #         # 获取当前人的昵称
+    #         url1 = "http://127.0.0.1:5700/get_group_member_info?group_id=" + \
+    #             str(gid) + "&user_id=" + str(uid)
+    #         r_1 = requests.get(url1)
+    #         name = r_1.json()['data']['card']
+    #         if len(name) == 0:
+    #             name = r_1.json()['data']['nickname']
 
-            # 上架
-            sql_text_8 = "INSERT INTO jiaoyisuo VALUES('" + str(sale_number) + "', '" + str(
-                name) + "','" + str(uid) + "', '" + str(sale_thing) + "', " + str(sale_namidou) + ")"
-            cur2.execute(sql_text_8)
+    #         # 上架
+    #         sql_text_8 = "INSERT INTO jiaoyisuo VALUES('" + str(sale_number) + "', '" + str(
+    #             name) + "','" + str(uid) + "', '" + str(sale_thing) + "', " + str(sale_namidou) + ")"
+    #         cur2.execute(sql_text_8)
 
-            # 确认插入
-            conn2.commit()
-            # 关闭游标
-            cur2.close()
-            # 关闭连接
-            conn2.close()
+    #         # 确认插入
+    #         conn2.commit()
+    #         # 关闭游标
+    #         cur2.close()
+    #         # 关闭连接
+    #         conn2.close()
 
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=物品上架成功~"
-            print(url)
-            requests.get(url)
-            return 'OK'
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=物品上架成功~"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
 
-        except:
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=格式似乎不太对呢~"
-            print(url)
-            requests.get(url)
-            return 'OK'
+    #     except:
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=格式似乎不太对呢~"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
 
-    # 交易所下架功能
-    if raw_message[0:3] == '下架 ':
-        try:
-            # 拆分语句
-            new_message = raw_message[3:]  # 下架编号
+    # # 交易所下架功能
+    # if raw_message[0:3] == '下架 ':
+    #     try:
+    #         # 拆分语句
+    #         new_message = raw_message[3:]  # 下架编号
 
-            # 查询交易所
-            conn = sqlite3.connect('jiaoyisuo.db')
-            cur = conn.cursor()
+    #         # 查询交易所
+    #         conn = sqlite3.connect('jiaoyisuo.db')
+    #         cur = conn.cursor()
 
-            # 检查是否是本人操作
-            sql_text_1 = "SELECT * FROM jiaoyisuo WHERE 编号 = '" + \
-                str(new_message) + "'"
-            cur.execute(sql_text_1)
-            r = cur.fetchall()
-            if len(r) == 0:
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=似乎没有这个编号呢~"
-                print(url)
-                requests.get(url)
-                return 'OK'
-            if str(r[0][2]) != str(uid):
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=还想下架别人的商品？哼！"
-                print(url)
-                requests.get(url)
-                return 'OK'
-            # 获取商品名称
-            xiajia_thing = r[0][3]
-            # 开始下架
-            sql_text_2 = "DELETE FROM jiaoyisuo WHERE 编号='" + \
-                str(new_message) + "'"
-            cur.execute(sql_text_2)
-            # 确认插入
-            conn.commit()
-            # 关闭游标
-            cur.close()
-            # 关闭连接
-            conn.close()
+    #         # 检查是否是本人操作
+    #         sql_text_1 = "SELECT * FROM jiaoyisuo WHERE 编号 = '" + \
+    #             str(new_message) + "'"
+    #         cur.execute(sql_text_1)
+    #         r = cur.fetchall()
+    #         if len(r) == 0:
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=似乎没有这个编号呢~"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
+    #         if str(r[0][2]) != str(uid):
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=还想下架别人的商品？哼！"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
+    #         # 获取商品名称
+    #         xiajia_thing = r[0][3]
+    #         # 开始下架
+    #         sql_text_2 = "DELETE FROM jiaoyisuo WHERE 编号='" + \
+    #             str(new_message) + "'"
+    #         cur.execute(sql_text_2)
+    #         # 确认插入
+    #         conn.commit()
+    #         # 关闭游标
+    #         cur.close()
+    #         # 关闭连接
+    #         conn.close()
 
-            # 返还到本人背包
-            conn2 = sqlite3.connect('have_things.db')
-            cur2 = conn2.cursor()
+    #         # 返还到本人背包
+    #         conn2 = sqlite3.connect('have_things.db')
+    #         cur2 = conn2.cursor()
 
-            # 加入背包
-            sql_text_3 = "INSERT INTO have_things VALUES('" + str(
-                uid) + "','" + str(xiajia_thing) + "')"
-            cur2.execute(sql_text_3)
-            # 确认插入
-            conn2.commit()
-            # 关闭游标
-            cur2.close()
-            # 关闭连接
-            conn2.close()
+    #         # 加入背包
+    #         sql_text_3 = "INSERT INTO have_things VALUES('" + str(
+    #             uid) + "','" + str(xiajia_thing) + "')"
+    #         cur2.execute(sql_text_3)
+    #         # 确认插入
+    #         conn2.commit()
+    #         # 关闭游标
+    #         cur2.close()
+    #         # 关闭连接
+    #         conn2.close()
 
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=物品下架成功~"
-            print(url)
-            requests.get(url)
-            return 'OK'
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=物品下架成功~"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
 
-        except:
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=格式似乎不太对呢~"
-            print(url)
-            requests.get(url)
-            return 'OK'
+    #     except:
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=格式似乎不太对呢~"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
 
-    # 交易所物品购买功能
-    if raw_message[0:3] == '购买 ':
-        try:
-            # 拆分语句
-            new_message = raw_message[3:]  # 购买编号
-            # 查询交易所
-            conn = sqlite3.connect('jiaoyisuo.db')
-            cur = conn.cursor()
-            sql_text_1 = "SELECT * FROM jiaoyisuo WHERE 编号 = '" + \
-                str(new_message) + "'"
-            cur.execute(sql_text_1)
-            r = cur.fetchall()
-            if len(r) == 0:
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=似乎没有这个商品编号呢~"
-                print(url)
-                requests.get(url)
-                return 'OK'
-            if str(r[0][2]) == str(uid):
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=买自己的物品，闲的无聊？"
-                print(url)
-                requests.get(url)
-                return 'OK'
-            # 开始购买
-            sale_qq = r[0][2]
-            sale_thing = r[0][3]
-            sale_namidou = r[0][4]
+    # # 交易所物品购买功能
+    # if raw_message[0:3] == '购买 ':
+    #     try:
+    #         # 拆分语句
+    #         new_message = raw_message[3:]  # 购买编号
+    #         # 查询交易所
+    #         conn = sqlite3.connect('jiaoyisuo.db')
+    #         cur = conn.cursor()
+    #         sql_text_1 = "SELECT * FROM jiaoyisuo WHERE 编号 = '" + \
+    #             str(new_message) + "'"
+    #         cur.execute(sql_text_1)
+    #         r = cur.fetchall()
+    #         if len(r) == 0:
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=似乎没有这个商品编号呢~"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
+    #         if str(r[0][2]) == str(uid):
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=买自己的物品，闲的无聊？"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
+    #         # 开始购买
+    #         sale_qq = r[0][2]
+    #         sale_thing = r[0][3]
+    #         sale_namidou = r[0][4]
 
-            # 检查是否有足够娜米豆
-            conn2 = sqlite3.connect('person_info.db')
-            cur2 = conn2.cursor()
-            sql_text_2 = "SELECT * FROM info WHERE QQ = '" + str(uid) + "'"
-            cur2.execute(sql_text_2)
-            r2 = cur2.fetchall()
-            have_namidou = r2[0][3]
+    #         # 检查是否有足够娜米豆
+    #         conn2 = sqlite3.connect('person_info.db')
+    #         cur2 = conn2.cursor()
+    #         sql_text_2 = "SELECT * FROM info WHERE QQ = '" + str(uid) + "'"
+    #         cur2.execute(sql_text_2)
+    #         r2 = cur2.fetchall()
+    #         have_namidou = r2[0][3]
 
-            # 获取出售人娜米豆信息
-            sql_text_3 = "SELECT * FROM info WHERE QQ = '" + str(sale_qq) + "'"
-            cur2.execute(sql_text_3)
-            r3 = cur2.fetchall()
-            have_namidou_sale = r3[0][3]
+    #         # 获取出售人娜米豆信息
+    #         sql_text_3 = "SELECT * FROM info WHERE QQ = '" + str(sale_qq) + "'"
+    #         cur2.execute(sql_text_3)
+    #         r3 = cur2.fetchall()
+    #         have_namidou_sale = r3[0][3]
 
-            # 购买人豆不够则退出
-            if int(have_namidou) < int(sale_namidou):
-                url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                    str(gid) + "&message=豆豆似乎不够呢~"
-                print(url)
-                requests.get(url)
-                return 'OK'
+    #         # 购买人豆不够则退出
+    #         if int(have_namidou) < int(sale_namidou):
+    #             url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #                 str(gid) + "&message=豆豆似乎不够呢~"
+    #             print(url)
+    #             requests.get(url)
+    #             return 'OK'
 
-            # 购买人扣除娜米豆
-            new_namidou_buy = int(have_namidou) - int(sale_namidou)
-            # 出售人获得娜米豆
-            new_namidou_sale = int(have_namidou_sale) + int(sale_namidou)
-            # 更新娜米豆信息
-            sql_text_4 = "UPDATE info SET 娜米豆 = " + \
-                str(new_namidou_buy) + " WHERE QQ = " + str(uid)
-            print(sql_text_4)
-            cur2.execute(sql_text_4)
-            sql_text_5 = "UPDATE info SET 娜米豆 = " + \
-                str(new_namidou_sale) + " WHERE QQ = " + str(sale_qq)
-            print(sql_text_5)
-            cur2.execute(sql_text_5)
-            # 确认插入
-            conn2.commit()
-            # 关闭游标
-            cur2.close()
-            # 关闭连接
-            conn2.close()
+    #         # 购买人扣除娜米豆
+    #         new_namidou_buy = int(have_namidou) - int(sale_namidou)
+    #         # 出售人获得娜米豆
+    #         new_namidou_sale = int(have_namidou_sale) + int(sale_namidou)
+    #         # 更新娜米豆信息
+    #         sql_text_4 = "UPDATE info SET 娜米豆 = " + \
+    #             str(new_namidou_buy) + " WHERE QQ = " + str(uid)
+    #         print(sql_text_4)
+    #         cur2.execute(sql_text_4)
+    #         sql_text_5 = "UPDATE info SET 娜米豆 = " + \
+    #             str(new_namidou_sale) + " WHERE QQ = " + str(sale_qq)
+    #         print(sql_text_5)
+    #         cur2.execute(sql_text_5)
+    #         # 确认插入
+    #         conn2.commit()
+    #         # 关闭游标
+    #         cur2.close()
+    #         # 关闭连接
+    #         conn2.close()
 
-            # 交易所下架物品
-            sql_text_6 = "DELETE FROM jiaoyisuo WHERE 编号='" + \
-                str(new_message) + "'"
-            cur.execute(sql_text_6)
-            # 确认插入
-            conn.commit()
-            # 关闭游标
-            cur.close()
-            # 关闭连接
-            conn.close()
+    #         # 交易所下架物品
+    #         sql_text_6 = "DELETE FROM jiaoyisuo WHERE 编号='" + \
+    #             str(new_message) + "'"
+    #         cur.execute(sql_text_6)
+    #         # 确认插入
+    #         conn.commit()
+    #         # 关闭游标
+    #         cur.close()
+    #         # 关闭连接
+    #         conn.close()
 
-            # 加入购买者背包
-            conn3 = sqlite3.connect('have_things.db')
-            cur3 = conn3.cursor()
+    #         # 加入购买者背包
+    #         conn3 = sqlite3.connect('have_things.db')
+    #         cur3 = conn3.cursor()
 
-            # 加入背包
-            sql_text_7 = "INSERT INTO have_things VALUES('" + str(
-                uid) + "','" + str(sale_thing) + "')"
-            cur3.execute(sql_text_7)
-            # 确认插入
-            conn3.commit()
-            # 关闭游标
-            cur3.close()
-            # 关闭连接
-            conn3.close()
+    #         # 加入背包
+    #         sql_text_7 = "INSERT INTO have_things VALUES('" + str(
+    #             uid) + "','" + str(sale_thing) + "')"
+    #         cur3.execute(sql_text_7)
+    #         # 确认插入
+    #         conn3.commit()
+    #         # 关闭游标
+    #         cur3.close()
+    #         # 关闭连接
+    #         conn3.close()
 
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:face,id=144]购买成功~\n你还剩余 " + str(
-                new_namidou_buy) + " 娜米豆~\n[CQ:at,qq=" + str(sale_qq) + "]\n获得 " + str(sale_namidou) + " 娜米豆"
-            print(url)
-            requests.get(url)
-            return 'OK'
-        except:
-            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-                str(gid) + "&message=格式似乎不太对呢~"
-            print(url)
-            requests.get(url)
-            return 'OK'
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + str(gid) + "&message=[CQ:face,id=144]购买成功~\n你还剩余 " + str(
+    #             new_namidou_buy) + " 娜米豆~\n[CQ:at,qq=" + str(sale_qq) + "]\n获得 " + str(sale_namidou) + " 娜米豆"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
+    #     except:
+    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+    #             str(gid) + "&message=格式似乎不太对呢~"
+    #         print(url)
+    #         requests.get(url)
+    #         return 'OK'
 
     # 更换携带宠物
     if raw_message[0:3] == '携带 ':

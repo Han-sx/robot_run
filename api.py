@@ -29,19 +29,19 @@ def keyword_g(json):
     # # 如果有人@娜娜米
     # if '[CQ:at,qq=2246376807]' in raw_message:
 
-    # # 返回图片
-    # if raw_message == '涩图' or raw_message == '瑟图' or raw_message == '色图' or raw_message == '来点色图' or raw_message == '来点瑟图' or raw_message == '来点涩图':
-    #     while account != 2:
-    #         r = requests.get("https://api.lolicon.app/setu/v2")  # 获取
-    #         p_url = r.json()['data'][0]['urls']['original']  # 解析url
-    #         url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
-    #             str(gid) + "&message=[CQ:image,file=" + str(p_url) + "]"
-    #         requests.get(url)
-    #         print(raw_message + str(uid))
-    #         print(p_url)
-    #         account += 1
-    #         time.sleep(1)
-    #     return 'OK'
+    # 返回图片
+    if raw_message == '涩图' or raw_message == '瑟图' or raw_message == '色图' or raw_message == '来点色图' or raw_message == '来点瑟图' or raw_message == '来点涩图':
+        while account != 3:
+            r = requests.get("https://api.lolicon.app/setu/v2")  # 获取
+            p_url = r.json()['data'][0]['urls']['original']  # 解析url
+            url = "http://127.0.0.1:5700/send_msg?message_type=group&group_id=" + \
+                str(gid) + "&message=[CQ:image,file=" + str(p_url) + "]"
+            requests.get(url)
+            print(raw_message + str(uid))
+            print(p_url)
+            account += 1
+            time.sleep(1)
+        return 'OK'
 
     # 自主学习
     if raw_message[0:3] == '学习 ':
